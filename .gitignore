@@ -1,0 +1,50 @@
+# 忽略node_modules目录
+node_modules/
+
+# 忽略构建产物
+dist/
+build/
+target/
+
+# 忽略IDE配置文件
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 忽略日志文件
+logs
+*.log
+
+# 忽略环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 忽略临时文件
+*.tmp
+*.temp
+
+# 忽略操作系统文件
+.DS_Store
+Thumbs.db
+
+# 忽略测试覆盖率报告
+coverage/
+
+# 忽略npm缓存
+.npm
+
+# 忽略yarn缓存
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# 忽略pnpm缓存
+pnpm-lock.yaml

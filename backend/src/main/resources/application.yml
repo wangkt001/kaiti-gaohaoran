@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: employment-system
+  
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/employment_system?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password: 
+    database: 0
+  
+  # 安全配置
+  security:
+    user:
+      name: admin
+      password: admin123
+
+# MyBatis-Plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.example.employment.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# JWT配置
+jwt:
+  secret: employment_system_secret_key_2026
+  expiration: 86400 # 24小时
+  header: Authorization
+
+# 服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# 日志配置
+logging:
+  level:
+    root: info
+    com.example.employment: debug
