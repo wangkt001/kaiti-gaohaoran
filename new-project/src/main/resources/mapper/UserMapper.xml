@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.employment.mapper.UserMapper">
+    <insert id="insert" parameterType="com.example.employment.entity.User">
+        INSERT INTO user (username, password, role, status) 
+        VALUES (#{username}, #{password}, #{role}, #{status})
+    </insert>
+    
+    <update id="update" parameterType="com.example.employment.entity.User">
+        UPDATE user 
+        SET username = #{username}, password = #{password}, role = #{role}, status = #{status} 
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+</mapper>

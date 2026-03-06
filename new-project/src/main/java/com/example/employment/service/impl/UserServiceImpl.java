@@ -1,25 +1,23 @@
 package com.example.employment.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.employment.entity.User;
 import com.example.employment.mapper.UserMapper;
 import com.example.employment.service.UserService;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
+    
+    @Autowired
+    private UserMapper userMapper;
     
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     
     @Override
     public User findByUsername(String username) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", username);
-        return baseMapper.selectOne(queryWrapper);
+        return userMapper.findByUsername(username);
     }
     
     @Override
@@ -31,7 +29,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 加密密码
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setStatus("active");
-        return save(user);
+        return userMapper.insert(user) > 0;
     }
     
     @Override
@@ -47,15 +45,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
     
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
-        }
-        return org.springframework.security.core.userdetails.User.builder()
-            .username(user.getUsername())
-            .password(user.getPassword())
-            .roles(user.getRole())
-            .build();
+    public User getById(Long id) {
+        return userMapper.findById(id);
+    }
+    
+    @Override
+    public boolean updateById(User user) {
+        return userMapper.update(user) > 0;
+    }
+    
+    @Override
+    public boolean removeById(Long id) {
+        return userMapper.deleteById(id) > 0;
     }
 }

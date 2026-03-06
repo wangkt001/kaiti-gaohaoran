@@ -1,6 +1,6 @@
 spring:
   application:
-    name: employment-system
+    name: minimal-project
   
   # 数据库配置
   datasource:
@@ -8,33 +8,15 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-  
-
-  
-
 
 # MyBatis-Plus配置
 mybatis-plus:
-  type-aliases-package: com.example.employment.entity
-  mapper-locations: classpath:mapper/**/*.xml
-  global-config:
-    db-config:
-      id-type: auto
+  type-aliases-package: com.example.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true
-  base-package: com.example.employment.mapper
-
-
 
 # 服务器配置
 server:
   port: 8080
   servlet:
     context-path: /api
-
-# 日志配置
-logging:
-  level:
-    root: info
-    com.example.employment: debug
